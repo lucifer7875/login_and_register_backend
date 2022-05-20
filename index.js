@@ -82,7 +82,7 @@ app.post("/register", (req, res) => {                                // URL BASE
 
 })
 
-// personal_info post route
+// personal_info post route pending
 
 app.post("/personal_info", (req, res) => {
     const { name, mobile_number, age, email } = req.body
