@@ -18,27 +18,13 @@ mongoose.connect(
         console.log("DB connected")
     })
 
-const personal_Info = new mongoose.Schema({})
+// const personal_Info = new mongoose.Schema({})
 
 const userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    TempName: {
-        type: String,
-    },
-    TempMobile_Number: {
-        type: Number,
-    },
-    TempAge: {
-        type: Number,
-
-        min: 18,
-        max: 60,
-    },
-    TempEmail: {
-        type: String,
-    },
+    personalInfo: {},
 })
 
 const User = new mongoose.model("User", userSchema)
@@ -82,11 +68,20 @@ app.post("/register", (req, res) => {                                // URL BASE
 
 })
 
-// personal_info post route pending
+// personal_info post route
 
-app.post("/personal_info", (req, res) => {
-    const { name, mobile_number, age, email } = req.body
+app.post("/personal_info", async (req, res) => {
+    const { user_id } = req.body
 
+    console.log(req.body)
+    delete req.body.user_id
+
+    User.updateOne({ _id: user_id }, { $set: { personalInfo: req.body } })
+        .then(
+            (result, err) => {
+                return res.status(200).json({ data: result, message: "details updated" })
+            }
+        )
 })
 
 
