@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     personalInfo: {},
+    educationInfo: {},
+    workExprience: {},
+    hobbies: {},
 })
 
 const User = new mongoose.model("User", userSchema)
@@ -77,6 +80,57 @@ app.post("/personal_info", async (req, res) => {
     delete req.body.user_id
 
     User.updateOne({ _id: user_id }, { $set: { personalInfo: req.body } })
+        .then(
+            (result, err) => {
+                return res.status(200).json({ data: result, message: "details updated" })
+            }
+        )
+})
+
+// Your_Education_Info post route
+
+app.post("/your_education_info", async (req, res) => {
+    const { user_id } = req.body
+
+    console.log(req.body)
+    delete req.body.user_id
+    console.log(req.body)
+
+    User.updateOne({ _id: user_id }, { $set: { educationInfo: req.body } })
+        .then(
+            (result, err) => {
+                return res.status(200).json({ data: result, message: "details updated" })
+            }
+        )
+})
+
+// work_experience post route
+
+app.post("/work_exp", async (req, res) => {
+    const { user_id } = req.body
+
+    console.log(req.body)
+    delete req.body.user_id
+    console.log(req.body)
+
+    User.updateOne({ _id: user_id }, { $set: { workExprience: req.body } })
+        .then(
+            (result, err) => {
+                return res.status(200).json({ data: result, message: "details updated" })
+            }
+        )
+})
+
+// hobbis port route 
+
+app.post("/hobbis", async (req, res) => {
+    const { user_id } = req.body
+
+    console.log(req.body)
+    delete req.body.user_id
+    console.log(req.body)
+
+    User.updateOne({ _id: user_id }, { $set: { hobbies: req.body } })
         .then(
             (result, err) => {
                 return res.status(200).json({ data: result, message: "details updated" })
