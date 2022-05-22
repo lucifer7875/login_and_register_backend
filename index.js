@@ -138,6 +138,12 @@ app.post("/hobbis", async (req, res) => {
         )
 })
 
+// resume route
+app.get("/resume", async (req, res) => {
+    console.log("got ur resume request");
+    console.log(req.body);
+    console.log(req.data?.args);
+})
 
 app.listen(9002, () => {
     console.log("BE started at port 9002")
